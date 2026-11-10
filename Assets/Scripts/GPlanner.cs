@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-using System.Diagnostics;
+
 
 public class Node
 {
@@ -84,7 +84,7 @@ public class GPlanner
         {
             if (action.IsAchievableGiven(parent.state))
             {
-                Dictionary<string, int> currentState = new Dictionary<string, int>(parent, state);
+                Dictionary<string, int> currentState = new Dictionary<string, int>(parent.state);
                 foreach (KeyValuePair<string, int> eff in action.effects)
                 {
                     if (!currentState.ContainsKey(eff.Key))
@@ -109,8 +109,8 @@ public class GPlanner
                     }
                 }
             }
-            return foundPath;
         }
+        return foundPath;
     }
 
     private bool GoalAchieved(Dictionary<string, int> goal, Dictionary<string, int> state)
