@@ -1,4 +1,5 @@
-using System.Reflection.Metadata.Ecma335;
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class GoToHospital : GAction

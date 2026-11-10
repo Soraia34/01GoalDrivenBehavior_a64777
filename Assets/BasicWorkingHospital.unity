@@ -1128,6 +1128,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7881807149238628900, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 776040361}
+    - targetCorrespondingSourceObject: {fileID: 7881807149238628900, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 776040364}
+    - targetCorrespondingSourceObject: {fileID: 7881807149238628900, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 776040365}
   m_SourcePrefab: {fileID: 100100000, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
 --- !u!1 &776040359 stripped
 GameObject:
@@ -1144,7 +1150,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1168,14 +1174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f258cf8270375d4e90cbf7ac89cfc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoToHospital
-  actionName: Action
+  actionName: GoToHospital
   cost: 1
-  target: {fileID: 1000317771}
-  targetTag: 
-  duration: 0
+  target: {fileID: 0}
+  targetTag: Door
+  duration: 2
   preConditions: []
   afterEffects:
-  - key: isWaiting
+  - key: hasArrived
     value: 0
   agent: {fileID: 0}
   running: 0
@@ -1193,6 +1199,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Patient
   actions: []
   currentAction: {fileID: 0}
+--- !u!114 &776040364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776040359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4c42f8810186743a02e2271e8a75ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoToWaitingRoom
+  actionName: GoToWaitingRoom
+  cost: 1
+  target: {fileID: 0}
+  targetTag: WaitingArea
+  duration: 0
+  preConditions:
+  - key: hasRegistered
+    value: 0
+  afterEffects:
+  - key: isWaiting
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &776040365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776040359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e05edd9d33c0b74ca4ae9999897232e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Register
+  actionName: Register
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Reception
+  duration: 5
+  preConditions:
+  - key: hasArrived
+    value: 0
+  afterEffects:
+  - key: hasRegistered
+    value: 0
+  agent: {fileID: 0}
+  running: 0
 --- !u!1001 &811564243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2270,7 +2326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1203368122
 MonoBehaviour:
   m_ObjectHideFlags: 0
